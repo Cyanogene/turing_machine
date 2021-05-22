@@ -47,5 +47,39 @@ namespace Turing_Machine
         {
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            bool scatto = false;
+            string s = textBox2.Text;
+            List<string> a = s.Split('=', '\r', '\n').ToList();
+            a = a.Where(x => x != "").ToList();
+            Dictionary<(string, string), StateExecuter> c = new Dictionary<(string, string), StateExecuter>();
+            string v = a.First(x => x.Contains("-"));
+            Manager man = new Manager(label1, label2)
+            {
+                currentPosition = 0,
+                currentState = 0
+            };
+            string[] l = new string[1000];
+            foreach (var item in a)
+            {
+                
+                if (scatto)
+                {
+                    c.Add((l[0], l[1]), new StateExecuter(item, man));
+                    scatto = false;
+                }
+                if (item.Contains("-"))
+                {
+                    l = item.Split('-');
+                    scatto = true;
+                    
+                }
+                
+            }
+          //  c.Add((asd[0], asd[1]), new StateExecuter("", man));
+
+        }
     }
 }

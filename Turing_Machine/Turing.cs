@@ -40,7 +40,7 @@ namespace Turing_Machine
                             stato = 1;
                         }
                         pos++;
-                        pointer.Left += 14;
+                        pointer.Left += 13;
                         break;
 
                     case 1:
@@ -48,13 +48,13 @@ namespace Turing_Machine
                         {
                             stato = 2;
                             pos--;
-                            pointer.Left -= 14;
+                            pointer.Left -= 13;
                         }
 
                         else
                         {
                             pos++;
-                            pointer.Left += 14;
+                            pointer.Left += 13;
                         }
 
                         tape.Text = "";
@@ -68,21 +68,21 @@ namespace Turing_Machine
                             stato = 3;
                             listTape[pos] = "0";
                             pos--;
-                            pointer.Left -= 14;
+                            pointer.Left -= 13;
                         }
 
                         else if (listTape[pos] == "0")
                         {
                             listTape[pos] = "1";
                             pos--;
-                            pointer.Left -= 14;
+                            pointer.Left -= 13;
                         }
 
                         else
                         {
                             stato = 5;
                             pos++;
-                            pointer.Left += 14;
+                            pointer.Left += 13;
                         }
 
                         tape.Text = "";
@@ -97,7 +97,7 @@ namespace Turing_Machine
                         }
 
                         pos--;
-                        pointer.Left -= 14;
+                        pointer.Left -= 13;
                         break;
 
                     case 4:
@@ -105,7 +105,7 @@ namespace Turing_Machine
                         {
                             listTape[pos] = "0";
                             pos--;
-                            pointer.Left -= 14;
+                            pointer.Left -= 13;
                         }
 
                         else if (listTape[pos] == "0")
@@ -113,7 +113,7 @@ namespace Turing_Machine
                             stato = 0;
                             listTape[pos] = "1";
                             pos++;
-                            pointer.Left += 14;
+                            pointer.Left += 13;
                         }
 
                         else
@@ -122,7 +122,7 @@ namespace Turing_Machine
                             listTape[pos] = "1";
                             pos += 2;
                             listTape.Insert(0, " ");
-                            pointer.Left += 14;
+                            pointer.Left += 13;
                         }
 
                         tape.Text = "";
@@ -135,18 +135,22 @@ namespace Turing_Machine
                         {
                             listTape[pos] = "";
                             pos++;
-                            pointer.Left += 14;
+                            pointer.Left += 13;
                         }
                         else
                         {
                             finito = true;
                         }
+
+                        tape.Text = "";
+                        listTape.ForEach(Print);
+                        tape.Refresh();
                         break;
                 }
 
                 Thread.Sleep(600);
             }
-            pointer.Left = 372;
+            pointer.Left = tape.Left+1;
         }
 
         public void Print(string s)
