@@ -11,6 +11,7 @@ namespace Turing_Machine
         void ICommand.execute(Manager man)
         {
             man.currentPosition++;
+            man.pointer.Left += 13;
         }
     }
 }

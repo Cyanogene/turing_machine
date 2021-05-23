@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Turing_Machine
 {
-    class MoveLeft:ICommand
+    class Stop : ICommand
     {
         void ICommand.execute(Manager man)
         {
-            man.currentPosition--;
-            man.pointer.Left -= 13;
+            man.finito = true;
         }
     }
 }

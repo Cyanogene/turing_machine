@@ -10,14 +10,15 @@ namespace Turing_Machine
     class Manager
     {
         public int currentPosition;
-        public int currentState;
+        public string currentState;
         public List<string> listTape;
-        public Label tape;
         public Label pointer;
-        public Manager(Label myTape, Label myPointer)
+        public bool finito;
+        public Manager(Label myPointer, List<string> myListTape)
         {
-            tape = myTape;
             pointer = myPointer;
+            listTape = myListTape;
+            finito = false;
         }
     }
 }

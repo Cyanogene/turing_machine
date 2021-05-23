@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +14,8 @@ namespace Turing_Machine
     public partial class Form1 : Form
     {
         private Turing t;
+        Dictionary<(string, string), StateExecuter> c = new Dictionary<(string, string), StateExecuter>();
+
         public Form1()
         {
             InitializeComponent();
@@ -20,11 +23,11 @@ namespace Turing_Machine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = "";
+            lbl_input.Text = "";
             List<string> tape = new List<string>();
             tape.Add(" ");
             // X label1 = 14 per ogni numero
-            label1.Text = textBox1.Text;
+            lbl_input.Text = textBox1.Text;
             for (int i = 0; i < textBox1.Text.Length; i++)
             {
                 if (textBox1.Text[i] == ' ')
@@ -34,52 +37,80 @@ namespace Turing_Machine
 
             }
             tape.Add(" ");
-            t = new Turing(label1, label2);
+            t = new Turing(lbl_input, lbl_puntatore);
             t.BinaryAddition(tape);
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btn_CompilaAlgoritmo_Click(object sender, EventArgs e)
         {
             bool scatto = false;
             string s = textBox2.Text;
             List<string> a = s.Split('=', '\r', '\n').ToList();
+            List<string> tape = new List<string>();
+
             a = a.Where(x => x != "").ToList();
-            Dictionary<(string, string), StateExecuter> c = new Dictionary<(string, string), StateExecuter>();
-            string v = a.First(x => x.Contains("-"));
-            Manager man = new Manager(label1, label2)
-            {
-                currentPosition = 0,
-                currentState = 0
-            };
+
+
+
+
+
             string[] l = new string[1000];
             foreach (var item in a)
             {
-                
                 if (scatto)
                 {
-                    c.Add((l[0], l[1]), new StateExecuter(item, man));
+                    c.Add((l[0], l[1]), new StateExecuter(item));
                     scatto = false;
                 }
                 if (item.Contains("-"))
                 {
                     l = item.Split('-');
                     scatto = true;
-                    
                 }
-                
             }
-          //  c.Add((asd[0], asd[1]), new StateExecuter("", man));
+        }
 
+        private void btn_EseguiCustom_Click(object sender, EventArgs e)
+        {
+            List<string> tape = new List<string>();
+            for (int i = 0; i < textBox1.Text.Length; i++)
+            {
+                if (textBox1.Text[i] == ' ')
+                    tape.Add(" ");
+                else
+                    tape.Add(textBox1.Text[i].ToString());
+
+            }
+            Manager man = new Manager(lbl_puntatore, tape)
+            {
+                currentPosition = 0,
+                currentState = "S0"
+            };
+            while (!man.finito)
+            {
+                foreach (var item in c)
+                {
+                    if (item.Key == (man.currentState, tape[man.currentPosition]))
+                    {
+                        item.Value.execute(man);
+                        lbl_input.Text = "";
+                        tape.ForEach(Print);
+                        lbl_input.Refresh();
+                        Thread.Sleep(600);
+                    }
+                }
+            }
+            lbl_puntatore.Left = 370;
+
+        }
+        public void Print(string s)
+        {
+            lbl_input.Text += s;
+        }
+
+        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            lbl_input.Text = textBox1.Text;
         }
     }
 }

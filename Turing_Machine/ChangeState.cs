@@ -8,9 +8,9 @@ namespace Turing_Machine
 {
     class ChangeState : ICommand
     {
-        public int stato;
+        public string stato;
 
-        public ChangeState(int newStato)
+        public ChangeState(string newStato)
         {
             stato = newStato;
         }
