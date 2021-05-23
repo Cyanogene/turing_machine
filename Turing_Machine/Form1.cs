@@ -45,14 +45,9 @@ namespace Turing_Machine
         {
             bool scatto = false;
             string s = textBox2.Text;
-            List<string> a = s.Split('=', '\r', '\n').ToList();
             List<string> tape = new List<string>();
 
-            a = a.Where(x => x != "").ToList();
-
-
-
-
+            List<string> a = s.Split(new char[] { '=', '\r', '\n' },StringSplitOptions.RemoveEmptyEntries).ToList();
 
             string[] l = new string[1000];
             foreach (var item in a)
@@ -81,23 +76,22 @@ namespace Turing_Machine
                     tape.Add(textBox1.Text[i].ToString());
 
             }
+
             Manager man = new Manager(lbl_puntatore, tape)
             {
                 currentPosition = 0,
                 currentState = "S0"
             };
+
             while (!man.finito)
             {
-                foreach (var item in c)
+                if(c.TryGetValue((man.currentState, tape[man.currentPosition]),out StateExecuter executer))
                 {
-                    if (item.Key == (man.currentState, tape[man.currentPosition]))
-                    {
-                        item.Value.execute(man);
-                        lbl_input.Text = "";
-                        tape.ForEach(Print);
-                        lbl_input.Refresh();
-                        Thread.Sleep(600);
-                    }
+                    executer.execute(man);
+                    lbl_input.Text = "";
+                    tape.ForEach(Print);
+                    lbl_input.Refresh();
+                    Thread.Sleep(600);
                 }
             }
             lbl_puntatore.Left = 370;
