@@ -29,23 +29,17 @@ namespace Turing_Machine
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbl_input = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btn_AddizioneBinaria = new System.Windows.Forms.Button();
-            this.lbl_puntatore = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btn_CompilaAlgoritmo = new System.Windows.Forms.Button();
             this.btn_EseguiCustom = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lbl_input
-            // 
-            this.lbl_input.AutoSize = true;
-            this.lbl_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_input.Location = new System.Drawing.Point(373, 127);
-            this.lbl_input.Name = "lbl_input";
-            this.lbl_input.Size = new System.Drawing.Size(0, 30);
-            this.lbl_input.TabIndex = 0;
             // 
             // textBox1
             // 
@@ -64,16 +58,6 @@ namespace Turing_Machine
             this.btn_AddizioneBinaria.Text = "Addizione Binaria";
             this.btn_AddizioneBinaria.UseVisualStyleBackColor = true;
             this.btn_AddizioneBinaria.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // lbl_puntatore
-            // 
-            this.lbl_puntatore.AutoSize = true;
-            this.lbl_puntatore.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_puntatore.Location = new System.Drawing.Point(370, 88);
-            this.lbl_puntatore.Name = "lbl_puntatore";
-            this.lbl_puntatore.Size = new System.Drawing.Size(34, 39);
-            this.lbl_puntatore.TabIndex = 3;
-            this.lbl_puntatore.Text = "↓";
             // 
             // textBox2
             // 
@@ -103,34 +87,86 @@ namespace Turing_Machine
             this.btn_EseguiCustom.UseVisualStyleBackColor = true;
             this.btn_EseguiCustom.Click += new System.EventHandler(this.btn_EseguiCustom_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersVisible = false;
+            this.dataGridView1.Location = new System.Drawing.Point(338, 168);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.Size = new System.Drawing.Size(36, 46);
+            this.dataGridView1.TabIndex = 7;
+            this.dataGridView1.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DataGridView1_ColumnAdded);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(216, 36);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click_1);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(216, 88);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(216, 134);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_EseguiCustom);
             this.Controls.Add(this.btn_CompilaAlgoritmo);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.lbl_puntatore);
             this.Controls.Add(this.btn_AddizioneBinaria);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.lbl_input);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbl_input;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btn_AddizioneBinaria;
-        private System.Windows.Forms.Label lbl_puntatore;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button btn_CompilaAlgoritmo;
         private System.Windows.Forms.Button btn_EseguiCustom;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

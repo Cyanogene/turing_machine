@@ -23,22 +23,25 @@ namespace Turing_Machine
 
         private void button1_Click(object sender, EventArgs e)
         {
-            lbl_input.Text = "";
-            List<string> tape = new List<string>();
-            tape.Add(" ");
-            // X label1 = 14 per ogni numero
-            lbl_input.Text = textBox1.Text;
-            for (int i = 0; i < textBox1.Text.Length; i++)
+            List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
+            dataGridView1.Columns.Add("", "");
+            dataGridView1.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
+            foreach (DataGridViewTextBoxCell item in dataGridView1.Rows[0].Cells)
             {
-                if (textBox1.Text[i] == ' ')
-                    tape.Add(" ");
-                else
-                    tape.Add(textBox1.Text[i].ToString());
-
+                item.Selected = false;
+                tape.Add(item);
             }
-            tape.Add(" ");
-            t = new Turing(lbl_input, lbl_puntatore);
-            t.BinaryAddition(tape);
+            //for (int i = 0; i < textBox1.Text.Length; i++)
+            //{
+            //    if (textBox1.Text[i] == ' ')
+            //        tape.Add(" ");
+            //    else
+            //        tape.Add(textBox1.Text[i].ToString());
+
+            //}
+            ////tape.Add(" ");
+            t = new Turing();
+            t.BinaryAddition(tape, dataGridView1);
         }
 
         private void btn_CompilaAlgoritmo_Click(object sender, EventArgs e)
@@ -47,7 +50,7 @@ namespace Turing_Machine
             string s = textBox2.Text;
             List<string> tape = new List<string>();
 
-            List<string> a = s.Split(new char[] { '=', '\r', '\n' },StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> a = s.Split(new char[] { '=', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             string[] l = new string[1000];
             foreach (var item in a)
@@ -77,7 +80,7 @@ namespace Turing_Machine
 
             }
 
-            Manager man = new Manager(lbl_puntatore, tape)
+            Manager man = new Manager(new Label(), tape) //lbl_puntatore
             {
                 currentPosition = 0,
                 currentState = "S0"
@@ -85,26 +88,48 @@ namespace Turing_Machine
 
             while (!man.finito)
             {
-                if(c.TryGetValue((man.currentState, tape[man.currentPosition]),out StateExecuter executer))
+                if (c.TryGetValue((man.currentState, tape[man.currentPosition]), out StateExecuter executer))
                 {
                     executer.execute(man);
-                    lbl_input.Text = "";
+                    //lbl_input.Text = "";
                     tape.ForEach(Print);
-                    lbl_input.Refresh();
+                    //lbl_input.Refresh();
                     Thread.Sleep(600);
                 }
             }
-            lbl_puntatore.Left = 370;
+            //lbl_puntatore.Left = 370;
 
         }
         public void Print(string s)
         {
-            lbl_input.Text += s;
+            //lbl_input.Text += s;
         }
 
         private void textBox1_KeyUp(object sender, KeyEventArgs e)
         {
-            lbl_input.Text = textBox1.Text;
+            //lbl_input.Text = textBox1.Text;
+        }
+
+        private void Button1_Click_1(object sender, EventArgs e)
+        {
+            dataGridView1.Columns.Add("", "");
+            dataGridView1.Rows.Add();
+        }
+
+        private void DataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.Width = 20;
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Columns.Add("", "");
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Columns.Add("", "");
+            dataGridView1.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
         }
     }
 }

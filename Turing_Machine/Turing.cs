@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -14,155 +15,115 @@ namespace Turing_Machine
 
     class Turing
     {
-        Label tape;
-        Label pointer;
-        // Inventare sintassi
-        public Turing(Label myTape, Label myPointer)
+        public void BinaryAddition(List<DataGridViewTextBoxCell> listTape, DataGridView dataGrid)
         {
-            tape = myTape;
-            pointer = myPointer;
-        }
-        public void BinaryAddition(List<string> listTape)
-        {
-            tape.Refresh();
             int stato = 0;
             int pos = 1;
             bool finito = false;
-
+            int tempPos = pos;
             Thread.Sleep(100);
             while (!finito)
             {
+                if (tempPos >= 0 && tempPos <= listTape.Count - 1)
+                    listTape[tempPos].Style.BackColor = Color.Empty;
+
+                string s = listTape[pos].Value?.ToString() ?? "";
+                listTape[pos].Style.BackColor = Color.Cyan;
+                tempPos = pos;
                 switch (stato)
                 {
                     case 0:
-                        if (listTape[pos] == " ")
+                        if (s == "")
                         {
                             stato = 1;
                         }
                         pos++;
-                        pointer.Left += 13;
                         break;
 
                     case 1:
-                        if (listTape[pos] == " ")
+                        if (s == "")
                         {
                             stato = 2;
                             pos--;
-                            pointer.Left -= 13;
                         }
 
                         else
                         {
                             pos++;
-                            pointer.Left += 13;
                         }
-
-                        tape.Text = "";
-                        listTape.ForEach(Print);
-                        tape.Refresh();
                         break;
 
                     case 2:
-                        if (listTape[pos] == "1")
+                        if (s == "1")
                         {
                             stato = 3;
-                            listTape[pos] = "0";
+                            listTape[pos].Value = "0";
                             pos--;
-                            pointer.Left -= 13;
                         }
 
-                        else if (listTape[pos] == "0")
+                        else if (s == "0")
                         {
-                            listTape[pos] = "1";
+                            listTape[pos].Value = "1";
                             pos--;
-                            pointer.Left -= 13;
                         }
 
                         else
                         {
                             stato = 5;
                             pos++;
-                            pointer.Left += 13;
                         }
-
-                        tape.Text = "";
-                        listTape.ForEach(Print);
-                        tape.Refresh();
                         break;
 
                     case 3:
-                        if (listTape[pos] == " ")
+                        if (s == "")
                         {
                             stato = 4;
                         }
-
                         pos--;
-                        pointer.Left -= 13;
                         break;
 
                     case 4:
-                        if (listTape[pos] == "1")
+                        if (s == "1")
                         {
-                            listTape[pos] = "0";
+                            listTape[pos].Value = "0";
                             pos--;
-                            pointer.Left -= 13;
                         }
 
-                        else if (listTape[pos] == "0")
+                        else if (s == "0")
                         {
                             stato = 0;
-                            listTape[pos] = "1";
+                            listTape[pos].Value = "1";
                             pos++;
-                            pointer.Left += 13;
                         }
 
                         else
                         {
                             stato = 0;
-                            listTape[pos] = "1";
+                            listTape[pos].Value = "1";
                             pos += 2;
-                            listTape.Insert(0, " ");
-                            pointer.Left += 13;
+                            tempPos += 1;
+                            dataGrid.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell(), Selected = false });
+                            listTape.Insert(0, new DataGridViewTextBoxCell() { Selected = false });
                         }
-
-                        tape.Text = "";
-                        listTape.ForEach(Print);
-                        tape.Refresh();
                         break;
 
                     case 5:
-                        if (listTape[pos] == "1")
+                        if (s == "1")
                         {
-                            listTape[pos] = "";
+                            listTape[pos].Value = "";
                             pos++;
-                            pointer.Left += 13;
                         }
                         else
                         {
                             finito = true;
                         }
-
-                        tape.Text = "";
-                        listTape.ForEach(Print);
-                        tape.Refresh();
                         break;
                 }
-
+                dataGrid.ClearSelection();
+                dataGrid.Refresh();
                 Thread.Sleep(600);
             }
-            pointer.Left = tape.Left+1;
+            listTape[pos].Style.BackColor = Color.Empty;
         }
-
-        public void Print(string s)
-        {
-            tape.Text += s;
-        }
-        //tape.Text = "";
-        //                listTape.ForEach(Print);
-        //                pos--;
-        //                tape.Refresh();
-        //                pointer.Left -= 14;
-
-
     }
 }
