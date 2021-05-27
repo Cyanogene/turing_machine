@@ -13,9 +13,9 @@ namespace Turing_Machine
         {
             contenuto = newContenuto;
         }
-        void ICommand.execute(Manager man)
+        void ICommand.Execute(Manager man)
         {
-            man.listTape[man.currentPosition] = contenuto;
+            man.listTape[man.currentPosition].Value = contenuto;
         }
     }
 }

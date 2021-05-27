@@ -8,6 +8,6 @@ namespace Turing_Machine
 {
     interface ICommand
     {
-        void execute(Manager man);
+        void Execute(Manager man);
     }
 }

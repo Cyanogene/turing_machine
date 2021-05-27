@@ -14,7 +14,7 @@ namespace Turing_Machine
         {
             stato = newStato;
         }
-        void ICommand.execute(Manager man)
+        void ICommand.Execute(Manager man)
         {
             man.currentState = stato;
         }

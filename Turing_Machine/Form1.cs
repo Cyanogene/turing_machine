@@ -14,34 +14,55 @@ namespace Turing_Machine
     public partial class Form1 : Form
     {
         private Turing t;
-        Dictionary<(string, string), StateExecuter> c = new Dictionary<(string, string), StateExecuter>();
+        Dictionary<(string, string), StateExecuter> customActions = new Dictionary<(string, string), StateExecuter>();
 
         public Form1()
         {
             InitializeComponent();
+            dgv_nastro.BackgroundColor = SystemColors.Control;
+            LoadColumns();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void LoadColumns()
         {
-            List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
-            dataGridView1.Columns.Add("", "");
-            dataGridView1.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
-            foreach (DataGridViewTextBoxCell item in dataGridView1.Rows[0].Cells)
+            dgv_nastro.Columns.Add("", "");
+            dgv_nastro.Rows.Add();
+            for (int i = 0; i < 4; i++)
             {
+                dgv_nastro.Columns.Add("", "");
+            }
+        }
+
+        private List<DataGridViewTextBoxCell> LoadTape(List<DataGridViewTextBoxCell> tape)
+        {
+            DataGridViewCellCollection row = dgv_nastro.Rows[0].Cells;
+            int pos = dgv_nastro.Columns.Count - 1;
+            string s1 = row[0].Value?.ToString() ?? "";
+            string s2 = row[pos].Value?.ToString() ?? "";
+
+            //if (!string.IsNullOrEmpty(s1))
+            //    dgv_nastro.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
+
+            if (!string.IsNullOrEmpty(s2))
+                dgv_nastro.Columns.Add("", "");
+
+            foreach (DataGridViewTextBoxCell item in dgv_nastro.Rows[0].Cells)
+            {
+                string s3 = item.Value?.ToString() ?? "";
+                if (s3 == "")
+                    item.Value = "";
                 item.Selected = false;
                 tape.Add(item);
             }
-            //for (int i = 0; i < textBox1.Text.Length; i++)
-            //{
-            //    if (textBox1.Text[i] == ' ')
-            //        tape.Add(" ");
-            //    else
-            //        tape.Add(textBox1.Text[i].ToString());
+            return tape;
+        }
 
-            //}
-            ////tape.Add(" ");
+        private void btn_AddizioneBinaria_Click(object sender, EventArgs e)
+        {
+            List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
+            tape = LoadTape(tape);
             t = new Turing();
-            t.BinaryAddition(tape, dataGridView1);
+            t.BinaryAddition(tape, dgv_nastro);
         }
 
         private void btn_CompilaAlgoritmo_Click(object sender, EventArgs e)
@@ -57,7 +78,7 @@ namespace Turing_Machine
             {
                 if (scatto)
                 {
-                    c.Add((l[0], l[1]), new StateExecuter(item));
+                    customActions.Add((l[0], l[1]), new StateExecuter(item));
                     scatto = false;
                 }
                 if (item.Contains("-"))
@@ -70,66 +91,44 @@ namespace Turing_Machine
 
         private void btn_EseguiCustom_Click(object sender, EventArgs e)
         {
-            List<string> tape = new List<string>();
-            for (int i = 0; i < textBox1.Text.Length; i++)
-            {
-                if (textBox1.Text[i] == ' ')
-                    tape.Add(" ");
-                else
-                    tape.Add(textBox1.Text[i].ToString());
 
-            }
+            List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
+            tape = LoadTape(tape);
 
-            Manager man = new Manager(new Label(), tape) //lbl_puntatore
+            // creo il manager che parte alla pos 0, stato 0
+
+            Manager man = new Manager(tape) //lbl_puntatore
             {
                 currentPosition = 0,
                 currentState = "S0"
             };
 
+            // finchè non ho il segnale di STOP, continuo a computare
+
             while (!man.finito)
             {
-                if (c.TryGetValue((man.currentState, tape[man.currentPosition]), out StateExecuter executer))
+                if (customActions.TryGetValue((man.currentState, tape[man.currentPosition].Value.ToString()), out StateExecuter executer))
                 {
                     executer.execute(man);
-                    //lbl_input.Text = "";
-                    tape.ForEach(Print);
-                    //lbl_input.Refresh();
+                    dgv_nastro.ClearSelection();
+                    dgv_nastro.Refresh();
                     Thread.Sleep(600);
                 }
             }
-            //lbl_puntatore.Left = 370;
 
         }
-        public void Print(string s)
+
+        private void btn_AggiungiCellaInizio_Click(object sender, EventArgs e)
         {
-            //lbl_input.Text += s;
+            dgv_nastro.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
         }
 
-        private void textBox1_KeyUp(object sender, KeyEventArgs e)
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            //lbl_input.Text = textBox1.Text;
+            if (e.ColumnIndex >= dgv_nastro.Columns.Count - 2)
+                dgv_nastro.Columns.Add("", "");
         }
 
-        private void Button1_Click_1(object sender, EventArgs e)
-        {
-            dataGridView1.Columns.Add("", "");
-            dataGridView1.Rows.Add();
-        }
-
-        private void DataGridView1_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
-        {
-            e.Column.Width = 20;
-        }
-
-        private void Button2_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Columns.Add("", "");
-        }
-
-        private void Button3_Click(object sender, EventArgs e)
-        {
-            dataGridView1.Columns.Add("", "");
-            dataGridView1.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
-        }
+        
     }
 }

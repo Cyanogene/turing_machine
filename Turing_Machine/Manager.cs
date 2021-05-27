@@ -9,16 +9,16 @@ namespace Turing_Machine
 {
     class Manager
     {
+        public int previousPosition;
         public int currentPosition;
         public string currentState;
-        public List<string> listTape;
-        public Label pointer;
+        public List<DataGridViewTextBoxCell> listTape;
         public bool finito;
-        public Manager(Label myPointer, List<string> myListTape)
+        public Manager(List<DataGridViewTextBoxCell> myListTape)
         {
-            pointer = myPointer;
             listTape = myListTape;
             finito = false;
+            previousPosition = currentPosition;
         }
     }
 }

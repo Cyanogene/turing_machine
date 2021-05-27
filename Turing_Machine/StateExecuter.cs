@@ -31,7 +31,7 @@ namespace Turing_Machine
         {
             foreach (var item in actions)
             {
-                item.execute(man);
+                item.Execute(man);
             }
         }
     }

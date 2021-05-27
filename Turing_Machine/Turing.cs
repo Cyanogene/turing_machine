@@ -9,9 +9,6 @@ using System.Windows.Forms;
 
 namespace Turing_Machine
 {
-    /// <summary>
-    /// DA AGGIUNGERE VARIE FORMATTAZIONI (SISTEMARE POSIZIONE PUNTATORE, AGGIORNARE DI PIU'
-    /// </summary>
 
     class Turing
     {
@@ -102,8 +99,8 @@ namespace Turing_Machine
                             listTape[pos].Value = "1";
                             pos += 2;
                             tempPos += 1;
-                            dataGrid.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell(), Selected = false });
-                            listTape.Insert(0, new DataGridViewTextBoxCell() { Selected = false });
+                            dataGrid.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
+                            listTape.Insert(0, new DataGridViewTextBoxCell());
                         }
                         break;
 
