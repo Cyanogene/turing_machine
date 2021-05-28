@@ -13,6 +13,7 @@ namespace Turing_Machine
         public int currentPosition;
         public string currentState;
         public List<DataGridViewTextBoxCell> listTape;
+        public DataGridView dataGrid;
         public bool finito;
         public Manager(List<DataGridViewTextBoxCell> myListTape)
         {

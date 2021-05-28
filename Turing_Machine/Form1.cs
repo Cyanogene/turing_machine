@@ -13,8 +13,8 @@ namespace Turing_Machine
 {
     public partial class Form1 : Form
     {
-        private Turing t;
-        Dictionary<(string, string), StateExecuter> customActions = new Dictionary<(string, string), StateExecuter>();
+        private Turing turingClass;
+        private Dictionary<(string, string), StateExecuter> customActions = new Dictionary<(string, string), StateExecuter>();
 
         public Form1()
         {
@@ -23,6 +23,7 @@ namespace Turing_Machine
             LoadColumns();
         }
 
+        // Carico alcune celle appena eseguito il programma
         private void LoadColumns()
         {
             dgv_nastro.Columns.Add("", "");
@@ -33,15 +34,12 @@ namespace Turing_Machine
             }
         }
 
+        // Aggiunge ogni cella del nastro a una lista di celle.
         private List<DataGridViewTextBoxCell> LoadTape(List<DataGridViewTextBoxCell> tape)
         {
             DataGridViewCellCollection row = dgv_nastro.Rows[0].Cells;
             int pos = dgv_nastro.Columns.Count - 1;
-            string s1 = row[0].Value?.ToString() ?? "";
             string s2 = row[pos].Value?.ToString() ?? "";
-
-            //if (!string.IsNullOrEmpty(s1))
-            //    dgv_nastro.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
 
             if (!string.IsNullOrEmpty(s2))
                 dgv_nastro.Columns.Add("", "");
@@ -59,52 +57,55 @@ namespace Turing_Machine
 
         private void btn_AddizioneBinaria_Click(object sender, EventArgs e)
         {
+            // Dichiaro ed eseguo la classe che effettua l'addizione binaria tra due fattori
             List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
             tape = LoadTape(tape);
-            t = new Turing();
-            t.BinaryAddition(tape, dgv_nastro);
+            turingClass = new Turing();
+            turingClass.BinaryAddition(tape, dgv_nastro);
         }
 
         private void btn_CompilaAlgoritmo_Click(object sender, EventArgs e)
         {
-            bool scatto = false;
-            string s = textBox2.Text;
-            List<string> tape = new List<string>();
-
-            List<string> a = s.Split(new char[] { '=', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
+            // Prendo i comandi dati in input e, dopo averli formattati, li inserisco in una lista.
+            bool istruzione = false;
+            string inputComandi = textBox2.Text;
+            List<string> listaComandi = inputComandi.Split(new char[] { '=', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             string[] l = new string[1000];
-            foreach (var item in a)
+
+            // Assegno le azioni di output ai comandi di input.
+            foreach (var item in listaComandi)
             {
-                if (scatto)
+                // Se istruzione == TRUE, allora vuol dire che sto facendo il parsing di un azione di output
+                if (istruzione)
                 {
                     customActions.Add((l[0], l[1]), new StateExecuter(item));
-                    scatto = false;
+                    istruzione = false;
                 }
+
+                // Separo i due valori per avere le due chiavi identificative di un comando.
                 if (item.Contains("-"))
                 {
                     l = item.Split('-');
-                    scatto = true;
+                    istruzione = true;
                 }
             }
         }
 
         private void btn_EseguiCustom_Click(object sender, EventArgs e)
         {
-
+            // Creo una lista con tutte le celle attualmente usate.
             List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
             tape = LoadTape(tape);
 
-            // creo il manager che parte alla pos 0, stato 0
-
-            Manager man = new Manager(tape) //lbl_puntatore
+            // Creo la variabile che gestisce i vari paramentri del nastro.
+            Manager man = new Manager(tape)
             {
                 currentPosition = 0,
-                currentState = "S0"
+                currentState = "S0",
+                dataGrid = dgv_nastro
             };
 
-            // finchè non ho il segnale di STOP, continuo a computare
-
+            // Finchè non ho il segnale di STOP, continuo a computare
             while (!man.finito)
             {
                 if (customActions.TryGetValue((man.currentState, tape[man.currentPosition].Value.ToString()), out StateExecuter executer))
@@ -120,15 +121,15 @@ namespace Turing_Machine
 
         private void btn_AggiungiCellaInizio_Click(object sender, EventArgs e)
         {
+            // Aggiunge una cella all'inizio del nastro.
             dgv_nastro.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            // Quando modifichiamo le celle più a destra, verranno create nuove celle per dare la sensazione di infinità del nastro.
             if (e.ColumnIndex >= dgv_nastro.Columns.Count - 2)
                 dgv_nastro.Columns.Add("", "");
-        }
-
-        
+        }   
     }
 }

@@ -15,12 +15,22 @@ namespace Turing_Machine
         public void BinaryAddition(List<DataGridViewTextBoxCell> listTape, DataGridView dataGrid)
         {
             int stato = 0;
-            int pos = 1;
+            int pos = 0;
             bool finito = false;
             int tempPos = pos;
             Thread.Sleep(100);
             while (!finito)
             {
+
+                if (pos <= -1)
+                {
+                    pos++;
+                    tempPos++;
+                    DataGridViewTextBoxColumn box = new DataGridViewTextBoxColumn() { CellTemplate = new DataGridViewTextBoxCell() };
+                    dataGrid.Columns.Insert(0, box);
+                    listTape.Insert(0, (DataGridViewTextBoxCell)dataGrid.Rows[0].Cells[0]);
+                }
+
                 if (tempPos >= 0 && tempPos <= listTape.Count - 1)
                     listTape[tempPos].Style.BackColor = Color.Empty;
 
@@ -97,10 +107,6 @@ namespace Turing_Machine
                         {
                             stato = 0;
                             listTape[pos].Value = "1";
-                            pos += 2;
-                            tempPos += 1;
-                            dataGrid.Columns.Insert(0, new DataGridViewColumn() { CellTemplate = new DataGridViewTextBoxCell() });
-                            listTape.Insert(0, new DataGridViewTextBoxCell());
                         }
                         break;
 
