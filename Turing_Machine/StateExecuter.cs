@@ -16,19 +16,23 @@ namespace Turing_Machine
             {
                 if (item == "<")
                     actions.Add(new MoveLeft());
+
                 else if (item == ">")
                     actions.Add(new MoveRight());
+
                 else if (item.ToUpper() == "STOP")
                     actions.Add(new Stop());
+
                 else if (item.ToUpper().StartsWith("S"))
                     actions.Add(new ChangeState(item));
+
                 else if (char.IsDigit(Convert.ToChar(item)))
                     actions.Add(new ChangeCell(item));
             }
         }
 
         public void execute(Manager man)
-        {
+        {   
             foreach (var item in actions)
             {
                 item.Execute(man);

@@ -29,13 +29,14 @@ namespace Turing_Machine
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_AddizioneBinaria = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_ScriviAlgoritmo = new System.Windows.Forms.TextBox();
             this.btn_CompilaAlgoritmo = new System.Windows.Forms.Button();
             this.btn_EseguiCustom = new System.Windows.Forms.Button();
             this.dgv_nastro = new System.Windows.Forms.DataGridView();
             this.btn_AggiungiCellaInizio = new System.Windows.Forms.Button();
+            this.btn_Help = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_nastro)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,14 +51,14 @@ namespace Turing_Machine
             this.btn_AddizioneBinaria.UseVisualStyleBackColor = true;
             this.btn_AddizioneBinaria.Click += new System.EventHandler(this.btn_AddizioneBinaria_Click);
             // 
-            // textBox2
+            // txt_ScriviAlgoritmo
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(12, 12);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(234, 616);
-            this.textBox2.TabIndex = 4;
+            this.txt_ScriviAlgoritmo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_ScriviAlgoritmo.Location = new System.Drawing.Point(12, 12);
+            this.txt_ScriviAlgoritmo.Multiline = true;
+            this.txt_ScriviAlgoritmo.Name = "txt_ScriviAlgoritmo";
+            this.txt_ScriviAlgoritmo.Size = new System.Drawing.Size(234, 616);
+            this.txt_ScriviAlgoritmo.TabIndex = 4;
             // 
             // btn_CompilaAlgoritmo
             // 
@@ -92,14 +93,14 @@ namespace Turing_Machine
             this.dgv_nastro.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_nastro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_nastro.ColumnHeadersVisible = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_nastro.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_nastro.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_nastro.Location = new System.Drawing.Point(252, 12);
             this.dgv_nastro.MultiSelect = false;
             this.dgv_nastro.Name = "dgv_nastro";
@@ -119,16 +120,28 @@ namespace Turing_Machine
             this.btn_AggiungiCellaInizio.UseVisualStyleBackColor = true;
             this.btn_AggiungiCellaInizio.Click += new System.EventHandler(this.btn_AggiungiCellaInizio_Click);
             // 
+            // btn_Help
+            // 
+            this.btn_Help.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Help.Location = new System.Drawing.Point(252, 179);
+            this.btn_Help.Name = "btn_Help";
+            this.btn_Help.Size = new System.Drawing.Size(162, 51);
+            this.btn_Help.TabIndex = 9;
+            this.btn_Help.Text = "Apri manuale";
+            this.btn_Help.UseVisualStyleBackColor = true;
+            this.btn_Help.Click += new System.EventHandler(this.Btn_Help_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1254, 649);
+            this.Controls.Add(this.btn_Help);
             this.Controls.Add(this.btn_AggiungiCellaInizio);
             this.Controls.Add(this.dgv_nastro);
             this.Controls.Add(this.btn_EseguiCustom);
             this.Controls.Add(this.btn_CompilaAlgoritmo);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txt_ScriviAlgoritmo);
             this.Controls.Add(this.btn_AddizioneBinaria);
             this.MaximumSize = new System.Drawing.Size(1270, 688);
             this.MinimumSize = new System.Drawing.Size(1270, 688);
@@ -142,11 +155,12 @@ namespace Turing_Machine
 
         #endregion
         private System.Windows.Forms.Button btn_AddizioneBinaria;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_ScriviAlgoritmo;
         private System.Windows.Forms.Button btn_CompilaAlgoritmo;
         private System.Windows.Forms.Button btn_EseguiCustom;
         private System.Windows.Forms.DataGridView dgv_nastro;
         private System.Windows.Forms.Button btn_AggiungiCellaInizio;
+        private System.Windows.Forms.Button btn_Help;
     }
 }
 

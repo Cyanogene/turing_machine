@@ -15,6 +15,7 @@ namespace Turing_Machine
         public List<DataGridViewTextBoxCell> listTape;
         public DataGridView dataGrid;
         public bool finito;
+
         public Manager(List<DataGridViewTextBoxCell> myListTape)
         {
             listTape = myListTape;
