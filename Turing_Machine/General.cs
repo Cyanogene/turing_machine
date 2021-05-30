@@ -74,7 +74,7 @@ namespace Turing_Machine
                 else
                 {
                     man.finito = true;
-                    MessageBox.Show("Non è stata trovata nessuna istruzione per andare avanti.\nQuesto è un caso di Halting Problem.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Non è stata trovata nessuna istruzione per andare avanti.\n L'esecuzione è stata fermata.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
