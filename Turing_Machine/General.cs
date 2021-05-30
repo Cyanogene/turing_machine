@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -12,6 +13,7 @@ namespace Turing_Machine
     {
         public void LoadActions(Dictionary<(string, string), StateExecuter> customActions, string inputComandi)
         {
+            customActions.Clear();
             // Prendo i comandi dati in input e, dopo averli formattati, li inserisco in una lista.
             bool istruzione = false;
             List<string> listaComandi = inputComandi.Split(new char[] { '=', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -31,6 +33,8 @@ namespace Turing_Machine
                 if (item.Contains("-"))
                 {
                     l = item.Split('-');
+                    if (l[1] == "_")
+                        l[1] = "";
                     istruzione = true;
                 }
             }
@@ -43,24 +47,39 @@ namespace Turing_Machine
             tape = LoadTape(tape, dgv_nastro);
 
             // Creo la variabile che gestisce i vari paramentri del nastro.
-            Manager man = new Manager(tape)
+            Manager man = new Manager()
             {
                 currentPosition = 0,
                 currentState = "S0",
-                dataGrid = dgv_nastro
+                dataGrid = dgv_nastro,
+                previousPosition = 0,
+                finito = false,
+                listTape = tape,
             };
 
+            man.listTape[man.currentPosition].Style.BackColor = Color.Cyan;
+            dgv_nastro.Refresh();
+            Thread.Sleep(600);
             // Finchè non ho il segnale di STOP, continuo a computare
             while (!man.finito)
             {
-                if (customActions.TryGetValue((man.currentState, tape[man.currentPosition].Value.ToString()), out StateExecuter executer))
+                string value = tape[man.currentPosition].Value?.ToString() ?? "";
+                if (customActions.TryGetValue((man.currentState, value), out StateExecuter executer))
                 {
                     executer.execute(man);
                     dgv_nastro.ClearSelection();
                     dgv_nastro.Refresh();
                     Thread.Sleep(600);
                 }
+                else
+                {
+                    man.finito = true;
+                    MessageBox.Show("Non è stata trovata nessuna istruzione per andare avanti.\nQuesto è un caso di Halting Problem.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+
+            man.listTape[man.currentPosition].Style.BackColor = Color.Empty;
+            dgv_nastro.Refresh();
         }
 
         // Aggiunge ogni cella del nastro a una lista di celle.

@@ -29,7 +29,7 @@ namespace Turing_Machine
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_AddizioneBinaria = new System.Windows.Forms.Button();
             this.txt_ScriviAlgoritmo = new System.Windows.Forms.TextBox();
             this.btn_CompilaAlgoritmo = new System.Windows.Forms.Button();
@@ -37,17 +37,19 @@ namespace Turing_Machine
             this.dgv_nastro = new System.Windows.Forms.DataGridView();
             this.btn_AggiungiCellaInizio = new System.Windows.Forms.Button();
             this.btn_Help = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_nastro)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_AddizioneBinaria
             // 
             this.btn_AddizioneBinaria.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_AddizioneBinaria.Location = new System.Drawing.Point(864, 138);
+            this.btn_AddizioneBinaria.Location = new System.Drawing.Point(864, 150);
             this.btn_AddizioneBinaria.Name = "btn_AddizioneBinaria";
             this.btn_AddizioneBinaria.Size = new System.Drawing.Size(330, 51);
             this.btn_AddizioneBinaria.TabIndex = 2;
-            this.btn_AddizioneBinaria.Text = "Addizione binaria";
+            this.btn_AddizioneBinaria.Text = "Esegui addizione binaria";
             this.btn_AddizioneBinaria.UseVisualStyleBackColor = true;
             this.btn_AddizioneBinaria.Click += new System.EventHandler(this.btn_AddizioneBinaria_Click);
             // 
@@ -93,14 +95,14 @@ namespace Turing_Machine
             this.dgv_nastro.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgv_nastro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_nastro.ColumnHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_nastro.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_nastro.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_nastro.Location = new System.Drawing.Point(252, 12);
             this.dgv_nastro.MultiSelect = false;
             this.dgv_nastro.Name = "dgv_nastro";
@@ -131,11 +133,33 @@ namespace Turing_Machine
             this.btn_Help.UseVisualStyleBackColor = true;
             this.btn_Help.Click += new System.EventHandler(this.Btn_Help_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(864, 207);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(330, 65);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Controlla se il numero binario è divisibile per 3";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(864, 278);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(330, 67);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Controlla se il numero binario ha un numero pari di \"0\"";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1254, 649);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_Help);
             this.Controls.Add(this.btn_AggiungiCellaInizio);
             this.Controls.Add(this.dgv_nastro);
@@ -161,6 +185,8 @@ namespace Turing_Machine
         private System.Windows.Forms.DataGridView dgv_nastro;
         private System.Windows.Forms.Button btn_AggiungiCellaInizio;
         private System.Windows.Forms.Button btn_Help;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

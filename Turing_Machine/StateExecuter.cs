@@ -26,7 +26,7 @@ namespace Turing_Machine
                 else if (item.ToUpper().StartsWith("S"))
                     actions.Add(new ChangeState(item));
 
-                else if (char.IsDigit(Convert.ToChar(item)))
+                else if (char.IsDigit(Convert.ToChar(item)) || item == "_")
                     actions.Add(new ChangeCell(item));
             }
         }

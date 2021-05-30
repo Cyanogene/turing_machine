@@ -11,7 +11,10 @@ namespace Turing_Machine
         public string contenuto;
         public ChangeCell(string newContenuto)
         {
-            contenuto = newContenuto;
+            if (newContenuto == "_")
+                contenuto = "";
+            else
+                contenuto = newContenuto;
         }
         void ICommand.Execute(Manager man)
         {
