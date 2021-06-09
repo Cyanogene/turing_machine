@@ -37,8 +37,8 @@ namespace Turing_Machine
             this.dgv_nastro = new System.Windows.Forms.DataGridView();
             this.btn_AggiungiCellaInizio = new System.Windows.Forms.Button();
             this.btn_Help = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btn_divisibile3 = new System.Windows.Forms.Button();
+            this.btn_numPari = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_nastro)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,33 +133,35 @@ namespace Turing_Machine
             this.btn_Help.UseVisualStyleBackColor = true;
             this.btn_Help.Click += new System.EventHandler(this.Btn_Help_Click);
             // 
-            // button1
+            // btn_divisibile3
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(864, 207);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(330, 65);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Controlla se il numero binario è divisibile per 3";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_divisibile3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_divisibile3.Location = new System.Drawing.Point(864, 207);
+            this.btn_divisibile3.Name = "btn_divisibile3";
+            this.btn_divisibile3.Size = new System.Drawing.Size(330, 65);
+            this.btn_divisibile3.TabIndex = 10;
+            this.btn_divisibile3.Text = "Controlla se il numero binario è divisibile per 3";
+            this.btn_divisibile3.UseVisualStyleBackColor = true;
+            this.btn_divisibile3.Click += new System.EventHandler(this.btn_divisibile3_Click);
             // 
-            // button2
+            // btn_numPari
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(864, 278);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(330, 67);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Controlla se il numero binario ha un numero pari di \"0\"";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_numPari.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_numPari.Location = new System.Drawing.Point(864, 278);
+            this.btn_numPari.Name = "btn_numPari";
+            this.btn_numPari.Size = new System.Drawing.Size(330, 67);
+            this.btn_numPari.TabIndex = 11;
+            this.btn_numPari.Text = "Controlla se il numero binario ha un numero pari di \"0\"";
+            this.btn_numPari.UseVisualStyleBackColor = true;
+            this.btn_numPari.Click += new System.EventHandler(this.btn_numPari_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1254, 649);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_numPari);
+            this.Controls.Add(this.btn_divisibile3);
             this.Controls.Add(this.btn_Help);
             this.Controls.Add(this.btn_AggiungiCellaInizio);
             this.Controls.Add(this.dgv_nastro);
@@ -185,8 +187,8 @@ namespace Turing_Machine
         private System.Windows.Forms.DataGridView dgv_nastro;
         private System.Windows.Forms.Button btn_AggiungiCellaInizio;
         private System.Windows.Forms.Button btn_Help;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btn_divisibile3;
+        private System.Windows.Forms.Button btn_numPari;
     }
 }
 

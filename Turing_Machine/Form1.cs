@@ -52,7 +52,7 @@ namespace Turing_Machine
 
         private void btn_EseguiCustom_Click(object sender, EventArgs e)
         {
-            generalClass.RunSimulator(dgv_nastro, customActions);
+            generalClass.RunSimulator(dgv_nastro, customActions, true);
         }
 
         private void btn_AggiungiCellaInizio_Click(object sender, EventArgs e)
@@ -75,5 +75,28 @@ namespace Turing_Machine
             if (dialogResult == DialogResult.Yes)
                 System.Diagnostics.Process.Start("https://github.com/Cyanogene/turing_machine/blob/main/README.md");
         }
+
+        private void btn_divisibile3_Click(object sender, EventArgs e)
+        {
+            string input = "S0-0=S0,0,>\nS0-1=S1,1,>\nS1-0=S2,0,>\nS1-1=S0,1,>\nS2-0=S1,0,>\nS2-1=S2,1,>\nS0-_=STOP";
+            generalClass.LoadActions(customActions, input);
+
+            if (generalClass.RunSimulator(dgv_nastro, customActions, false))
+                MessageBox.Show("Il numero non è divisibile per 3.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Il numero è divisibile per 3.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btn_numPari_Click(object sender, EventArgs e)
+        {
+            string input = "S0-0=S1,0,>\nS1-0=S0,0,>\nS0-1=S0,1,>\nS1-1=S1,1,>\nS0-_=STOP";
+            generalClass.LoadActions(customActions, input);
+
+            if (generalClass.RunSimulator(dgv_nastro, customActions, false))
+                MessageBox.Show("Il numero di \"0\" di questo numero binario è dispari.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+                MessageBox.Show("Il numero di \"0\" di questo numero binario è pari.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
+
 }

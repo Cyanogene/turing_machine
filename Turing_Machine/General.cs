@@ -40,8 +40,9 @@ namespace Turing_Machine
             }
         }
 
-        public void RunSimulator(DataGridView dgv_nastro, Dictionary<(string, string), StateExecuter> customActions)
+        public bool RunSimulator(DataGridView dgv_nastro, Dictionary<(string, string), StateExecuter> customActions, bool pulsanteEseguiPremuto)
         {
+            bool errore = false;
             // Creo una lista con tutte le celle attualmente usate.
             List<DataGridViewTextBoxCell> tape = new List<DataGridViewTextBoxCell>();
             tape = LoadTape(tape, dgv_nastro);
@@ -74,12 +75,15 @@ namespace Turing_Machine
                 else
                 {
                     man.finito = true;
-                    MessageBox.Show("Non è stata trovata nessuna istruzione per andare avanti.\n L'esecuzione è stata fermata.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (pulsanteEseguiPremuto)
+                        MessageBox.Show("Non è stata trovata nessuna istruzione per andare avanti.\nL'esecuzione è stata fermata.", "Macchina di Turing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    errore = true;
                 }
             }
 
             man.listTape[man.currentPosition].Style.BackColor = Color.Empty;
             dgv_nastro.Refresh();
+            return errore;
         }
 
         // Aggiunge ogni cella del nastro a una lista di celle.
